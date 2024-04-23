@@ -9,7 +9,7 @@ G="\e[32m"
 N="\e[0m"
 
 echo "Please enter root password"
-read -s "mysql_root_password"
+read -s mysql_root_password
 
 VALIDATE(){
     if [ $1 -ne 0 ]
