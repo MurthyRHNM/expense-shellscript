@@ -43,7 +43,7 @@ VALIDATE $? "Starting mysqld"
 
 #we should check below command manually then we need to include in this script
 
-mysql -h db.lrnm.online -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h db.lrnm.online -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$LOGFILE
