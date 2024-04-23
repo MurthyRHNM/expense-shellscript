@@ -35,5 +35,16 @@ VALIDATE $? "enabling mysqld"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting mysqld"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "password setup for root user"
+#mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+#VALIDATE $? "setting up root password"
+
+#we should check below command manually then we need to include in this script
+
+mysql -h db.lrnm.online -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$LOGFILE
+    VALIDATE $1 "setting up root password"
+else
+    echo -e "mysql root password already setting up  $Y SKIPPING $N"
+fi
