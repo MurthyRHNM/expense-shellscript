@@ -9,6 +9,8 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+# below command is safe instead of hard coding sensitive(password) info we should give while running the script
+#and should give correct password which we already setup for root
 echo "Please enter root password"
 read -s mysql_root_password
 
