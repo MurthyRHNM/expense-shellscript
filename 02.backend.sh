@@ -48,7 +48,7 @@ if [ $? -ne 0 ]
     echo -e "already expense user exit... $Y SKIPPING $N"
 fi
 
-mkdir -p /app &>>$LOGFILE
+mkdir -p /app &>>$LOGFILE # -p is ignoring if directory already existed
 VALIDATE $? "creating app directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOGFILE
@@ -62,6 +62,7 @@ VALIDATE $? "unzipping backend code"
 npm install &>>$LOGFILE
 VALIDATE $? "installing nodejs dependencies"
 
+# Please check file exact path
 cp /home/ec2-user/expense-shellscript/backend.service /etc/systemd/system/backend.service &>>$LOGFILE
 VALIDATE $? "copy the backend service"
 
